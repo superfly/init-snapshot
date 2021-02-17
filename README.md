@@ -4,7 +4,7 @@ This is a public snapshot of Fly's init code. It powers every Firecracker microv
 
 It is Rust-based and we thought making it public (even in this very limited fashion) could help as a reference for people making Rust-based init programs.
 
-# Usage
+## Usage
 
 Please note that our init is tailored for firecracker microvms. These instructions might not quite work and differ from what we do in production.
 
@@ -24,7 +24,7 @@ umount initmount
 - Attach your rootfs as /dev/vdb
 - Attach a vsock virtio device
 
-## initrd
+### initrd
 
 This init should also work packaged as an initrd. However, we're not running it as such at the time of this writing.
 
@@ -37,3 +37,9 @@ ls | cpio --null --create -V --format=newc -O ../initrd.cpio
 ```
 
 You can then use initrd.cpio as your initrd parameter.
+
+## `/fly/run.json`
+
+To configure out init, we're injecting a JSON file into the root device.
+
+You should be able to figure out the format by looking at [`lib.rs`](src/lib.rs)
